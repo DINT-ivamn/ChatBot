@@ -28,7 +28,8 @@ namespace ChatBot
 
         public MainWindow()
         {
-            Mensajes = new ObservableCollection<Mensaje>();
+            //Mensajes = new ObservableCollection<Mensaje>();
+            Mensajes = Mensaje.GenerarMensajes();
             InitializeComponent();
         }
 
@@ -68,7 +69,10 @@ namespace ChatBot
             ConfigurationDialog dialog = new ConfigurationDialog();
             if (dialog.ShowDialog() == true)
             {
-                // Cambiar los colores por los colores de la configuración
+                Properties.Settings.Default.ColorUsuario = dialog.ColorUsuario.Nombre;
+                Properties.Settings.Default.ColorFondo = dialog.ColorFondo.Nombre;
+                Properties.Settings.Default.ColorBot = dialog.ColorRobot.Nombre;
+                Properties.Settings.Default.Save();
             }
         }
 

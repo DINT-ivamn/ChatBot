@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="ColorUsuario" Type="System.String" Scope="User">
-      <Value Profile="(Default)">White</Value>
+      <Value Profile="(Default)">Aqua</Value>
     </Setting>
     <Setting Name="ColorFondo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">White</Value>
+      <Value Profile="(Default)">Aqua</Value>
     </Setting>
     <Setting Name="ColorBot" Type="System.String" Scope="User">
-      <Value Profile="(Default)">White</Value>
+      <Value Profile="(Default)">Aqua</Value>
     </Setting>
   </Settings>
 </SettingsFile>

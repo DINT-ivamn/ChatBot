@@ -29,7 +29,9 @@ namespace ChatBot.CustomWindows
         public ConfigurationDialog()
         {
             LoadColors();
-            // Inicializar los colores con los valores de la configuración
+            ColorUsuario = FindColor(Properties.Settings.Default.ColorUsuario);
+            ColorFondo = FindColor(Properties.Settings.Default.ColorFondo);
+            ColorRobot = FindColor(Properties.Settings.Default.ColorBot);
             InitializeComponent();
 
         }
@@ -47,6 +49,11 @@ namespace ChatBot.CustomWindows
             {
                 Colores.Add(new MyColor(item.Name));
             }
+        }
+
+        private MyColor FindColor(string nombre)
+        {
+            return Colores.ToList().Find(c => c.Nombre == nombre);
         }
     }
 }

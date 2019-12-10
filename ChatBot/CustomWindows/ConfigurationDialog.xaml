@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatBot.CustomWindows"
         xmlns:global="clr-namespace:ChatBot"
+        xmlns:prop="clr-namespace:ChatBot.Properties"
         mc:Ignorable="d"
         Title="ConfigurationDialog" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" x:Name="ConfigurationDialogWindows">
 
@@ -57,11 +58,11 @@
         <Label Target="{Binding ElementName=UsuarioComboBox}" Grid.Row="1" Grid.Column="0" Content="Color de _usuario" TabIndex="1"/>
         <Label Target="{Binding ElementName=RobotComboBox}" Grid.Row="2" Grid.Column="0" Content="Color de _robot" TabIndex="2"/>
         <ComboBox x:Name="FondoComboBox" Grid.Row="0" Grid.Column="1"
-                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorFondo}"/>
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorFondo, Mode=TwoWay}"/>
         <ComboBox x:Name="UsuarioComboBox" Grid.Row="1" Grid.Column="1"
-                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorUsuario}"/>
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorUsuario, Mode=TwoWay}"/>
         <ComboBox x:Name="RobotComboBox" Grid.Row="2" Grid.Column="1"
-                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorRobot}"/>
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorRobot, Mode=TwoWay}"/>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right">
             <Button x:Name="AceptarButton" Content="_Aceptar" IsDefault="True" TabIndex="3" Click="AceptarButton_Click"/>
             <Button Content="_Cancelar" IsCancel="True" TabIndex="4"/>

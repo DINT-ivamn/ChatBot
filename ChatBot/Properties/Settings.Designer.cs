@@ -25,7 +25,7 @@ namespace ChatBot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Aqua")]
         public string ColorUsuario {
             get {
                 return ((string)(this["ColorUsuario"]));
@@ -37,7 +37,7 @@ namespace ChatBot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Aqua")]
         public string ColorFondo {
             get {
                 return ((string)(this["ColorFondo"]));
@@ -49,7 +49,7 @@ namespace ChatBot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Aqua")]
         public string ColorBot {
             get {
                 return ((string)(this["ColorBot"]));
