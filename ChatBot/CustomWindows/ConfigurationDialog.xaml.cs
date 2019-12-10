@@ -21,17 +21,22 @@ namespace ChatBot.CustomWindows
     /// </summary>
     public partial class ConfigurationDialog : Window
     {
-        private ObservableCollection<MyColor> Colores { get; set; }
+        public ObservableCollection<MyColor> Colores { get; set; }
+        public MyColor ColorUsuario { get; set; }
+        public MyColor ColorFondo { get; set; }
+        public MyColor ColorRobot { get; set; }
 
         public ConfigurationDialog()
         {
-            InitializeComponent();
             LoadColors();
+            // Inicializar los colores con los valores de la configuración
+            InitializeComponent();
+
         }
 
         private void AceptarButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            DialogResult = true;
         }
 
         private void LoadColors()
@@ -42,7 +47,6 @@ namespace ChatBot.CustomWindows
             {
                 Colores.Add(new MyColor(item.Name));
             }
-            FondoComboBox.DataContext = Colores;
         }
     }
 }

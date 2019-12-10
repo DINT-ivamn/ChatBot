@@ -6,22 +6,45 @@
         xmlns:local="clr-namespace:ChatBot.CustomWindows"
         xmlns:global="clr-namespace:ChatBot"
         mc:Ignorable="d"
-        Title="ConfigurationDialog" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="ConfigurationDialog" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" x:Name="ConfigurationDialogWindows">
 
     <Window.Resources>
+        
+        <!-- Estilos -->
+
+        <!-- Estilos:ComboBox -->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ConfigurationDialog}, Path=Colores}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+
+        <!-- Estilos:Label -->
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+        
+        <!-- Estilos:Button -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
+        </Style>
+        
+        <!-- Templates -->
+        
         <DataTemplate DataType="{x:Type global:MyColor}">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Border BorderThickness="1" BorderBrush="Black" Width="40" Height="20" VerticalAlignment="Center">
-                    <Rectangle Fill="{Binding Path=Nombre}"/>
-                </Border>
-                <TextBlock Text="{Binding Path=Nombre}" VerticalAlignment="Center"/>
+                <Rectangle Fill="{Binding Path=Nombre}" Height="20" Width="40" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Path=Nombre}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     
     <Grid Height="200" Width="400">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -33,12 +56,15 @@
         <Label Target="{Binding ElementName=FondoComboBox}" Grid.Row="0" Grid.Column="0" Content="Color de _fondo" TabIndex="0"/>
         <Label Target="{Binding ElementName=UsuarioComboBox}" Grid.Row="1" Grid.Column="0" Content="Color de _usuario" TabIndex="1"/>
         <Label Target="{Binding ElementName=RobotComboBox}" Grid.Row="2" Grid.Column="0" Content="Color de _robot" TabIndex="2"/>
-        <ComboBox x:Name="FondoComboBox" Grid.Row="0" Grid.Column="1" IsTabStop="False" ItemsSource="{Binding}"/>
-        <ComboBox x:Name="UsuarioComboBox" Grid.Row="1" Grid.Column="1" IsTabStop="False" ItemsSource="{Binding}"/>
-        <ComboBox x:Name="RobotComboBox" Grid.Row="2" Grid.Column="1" IsTabStop="False" ItemsSource="{Binding}"/>
+        <ComboBox x:Name="FondoComboBox" Grid.Row="0" Grid.Column="1"
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorFondo}"/>
+        <ComboBox x:Name="UsuarioComboBox" Grid.Row="1" Grid.Column="1"
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorUsuario}"/>
+        <ComboBox x:Name="RobotComboBox" Grid.Row="2" Grid.Column="1"
+                  SelectedItem="{Binding ElementName=ConfigurationDialogWindows, Path=ColorRobot}"/>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right">
-            <Button x:Name="AceptarButton" Content="_Aceptar" IsDefault="True" TabIndex="3" Margin="5" Click="AceptarButton_Click"/>
-            <Button Content="_Cancelar" IsCancel="True" TabIndex="4" Margin="5"/>
+            <Button x:Name="AceptarButton" Content="_Aceptar" IsDefault="True" TabIndex="3" Click="AceptarButton_Click"/>
+            <Button Content="_Cancelar" IsCancel="True" TabIndex="4"/>
         </StackPanel>
     </Grid>
 </Window>

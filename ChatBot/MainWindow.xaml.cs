@@ -24,7 +24,7 @@ namespace ChatBot
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Mensaje> Mensajes;
+        public ObservableCollection<Mensaje> Mensajes { get; set; }
 
         public MainWindow()
         {
@@ -66,12 +66,15 @@ namespace ChatBot
         private void Configure_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ConfigurationDialog dialog = new ConfigurationDialog();
-            dialog.ShowDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                // Cambiar los colores por los colores de la configuración
+            }
         }
 
         private void CheckConnection_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            
         }
 
         private string ObtenerConversacion()

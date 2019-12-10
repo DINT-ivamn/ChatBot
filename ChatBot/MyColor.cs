@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace ChatBot
 {
-    class MyColor
+    public class MyColor
     {
         public string Nombre { get; set; }
 

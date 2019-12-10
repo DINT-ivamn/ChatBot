@@ -19,6 +19,7 @@
     <Window.Resources>
         
         <!-- Estilos -->
+        <!-- Estilos:Image -->
         <Style TargetType="{x:Type Image}" x:Key="Icono">
             <Setter Property="Height" Value="30"/>
         </Style>
@@ -85,6 +86,6 @@
             </Button>
             <TextBox FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
         </DockPanel>
-        <ItemsControl x:Name="MensajeItemsControl"/>
+        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}"/>
     </DockPanel>
 </Window>
