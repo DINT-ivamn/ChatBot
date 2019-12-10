@@ -1,0 +1,90 @@
+﻿<Window x:Class="ChatBot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatBot"
+        xmlns:com="clr-namespace:ChatBot.CustomCommands"
+        mc:Ignorable="d"
+        Title="ChatBot" Height="600" MinHeight="300" Width="400" MinWidth="200" Icon="Ico/robot.ico">
+
+    <Window.CommandBindings>
+        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute"/>
+        <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute"/>
+        <CommandBinding x:Name="ExitCommand" Command="com:CustomCommands.Exit" Executed="ExitCommand_Executed"/>
+        <CommandBinding x:Name="Configure" Command="com:CustomCommands.Configure" Executed="Configure_Executed"/>
+        <CommandBinding x:Name="CheckConnection" Command="com:CustomCommands.CheckConnection" Executed="CheckConnection_Executed"/>
+    </Window.CommandBindings>
+    
+    <Window.Resources>
+        
+        <!-- Estilos -->
+        <Style TargetType="{x:Type Image}" x:Key="Icono">
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        
+    </Window.Resources>
+    
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Nueva conversación" Command="ApplicationCommands.New">
+                    <MenuItem.Icon>
+                        <Image Source="Ico/dialog.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Guardar conversación..." Command="ApplicationCommands.Save">
+                    <MenuItem.Icon>
+                        <Image Source="Ico/save.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Salir" Command="com:CustomCommands.Exit">
+                    <MenuItem.Icon>
+                        <Image Source="Ico/exit.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Herramientas">
+                <MenuItem Header="Configuración..." Command="com:CustomCommands.Configure">
+                    <MenuItem.Icon>
+                        <Image Source="Ico/gear.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Comprobación de conexión" Command="com:CustomCommands.CheckConnection">
+                    <MenuItem.Icon>
+                        <Image Source="Ico/tick.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="ApplicationCommands.New">
+                    <Image Source="Ico/dialog.ico" Style="{StaticResource Icono}"/>
+                </Button>
+                <Button Command="ApplicationCommands.Save">
+                    <Image Source="Ico/save.ico" Style="{StaticResource Icono}"/>
+                </Button>
+                <Separator/>
+                <Button Command="com:CustomCommands.Configure">
+                    <Image Source="Ico/gear.ico" Style="{StaticResource Icono}"/>
+                </Button>
+                <Button Command="com:CustomCommands.CheckConnection">
+                    <Image Source="Ico/tick.ico" Style="{StaticResource Icono}"/>
+                </Button>
+                <Separator/>
+                <Button Command="com:CustomCommands.Exit">
+                    <Image Source="Ico/exit.ico" Style="{StaticResource Icono}"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button DockPanel.Dock="Right">
+            <Image Source="Ico/send.ico"  Style="{StaticResource Icono}"/>
+            </Button>
+            <TextBox FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
+        </DockPanel>
+        <ItemsControl x:Name="MensajeItemsControl"/>
+    </DockPanel>
+</Window>
