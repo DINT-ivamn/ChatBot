@@ -10,9 +10,11 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type global:MyColor}">
-            <StackPanel>
-                <Rectangle Width="20" Height="10" Fill="{Binding Path=Color.}"/>
-                <TextBlock Text="{Binding Path=Nombre}"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Border BorderThickness="1" BorderBrush="Black" Width="40" Height="20" VerticalAlignment="Center">
+                    <Rectangle Fill="{Binding Path=Nombre}"/>
+                </Border>
+                <TextBlock Text="{Binding Path=Nombre}" VerticalAlignment="Center"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>

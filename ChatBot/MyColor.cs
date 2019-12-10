@@ -9,12 +9,10 @@ namespace ChatBot
 {
     class MyColor
     {
-        public Color Color { get; set; }
         public string Nombre { get; set; }
 
-        public MyColor(Color color, string nombre)
+        public MyColor(string nombre)
         {
-            Color = color;
             Nombre = nombre;
         }
     }

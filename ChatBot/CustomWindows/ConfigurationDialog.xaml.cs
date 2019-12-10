@@ -40,7 +40,7 @@ namespace ChatBot.CustomWindows
             PropertyInfo[] properties = typeof(Colors).GetProperties();
             foreach (PropertyInfo item in properties)
             {
-                Colores.Add(new MyColor((Color) item.GetValue(new Color()), item.Name));
+                Colores.Add(new MyColor(item.Name));
             }
             FondoComboBox.DataContext = Colores;
         }
