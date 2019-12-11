@@ -65,7 +65,7 @@
                         <TextBlock Text="{Binding Path=Emisor}" VerticalAlignment="Center" FontWeight="Bold"
                                    FontSize="15"/>
                     </StackPanel>
-                    <TextBlock Text="{Binding Path=Texto}" FontSize="14"/>
+                    <TextBlock Text="{Binding Path=Texto}" FontSize="14" TextWrapping="Wrap"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -133,6 +133,8 @@
             </Button>
             <TextBox x:Name="MensajeTextBox" FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
         </DockPanel>
-        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}"/>
+        </ScrollViewer>
     </DockPanel>
 </Window>

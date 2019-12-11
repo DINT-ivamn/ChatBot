@@ -95,12 +95,12 @@ namespace ChatBot
             return builder.ToString();
         }
 
-        private void SendMessage_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void SendMessage_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Mensajes.Add(new Mensaje("Usuario", MensajeTextBox.Text, false));
             RespuestaRecibida = false;
             MensajeTextBox.Text = "";
-            ObtenerRespuestaBot();
+            await ObtenerRespuestaBot();
         }
 
         private void SendMessage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -108,19 +108,19 @@ namespace ChatBot
             e.CanExecute = RespuestaRecibida;
         }
 
-        private async void ObtenerRespuestaBot()
+        private async Task ObtenerRespuestaBot()
         {
             Mensaje mensajeBot = new Mensaje("Robot", "Procesando...", true);
             Mensajes.Add(mensajeBot);
             try
             {
                 mensajeBot.Texto = await QnA.PreguntarAsync(Mensajes.Last().Texto);
+                // ????
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            RespuestaRecibida = true;
         }
     }
 }
