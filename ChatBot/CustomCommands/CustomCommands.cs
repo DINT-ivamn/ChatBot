@@ -41,5 +41,15 @@ namespace ChatBot.CustomCommands
                     new KeyGesture(Key.O, ModifierKeys.Control)
                 }
             );
+        public static readonly RoutedUICommand SendMessage = new RoutedUICommand
+            (
+                "SendMessage",
+                "SendMessage",
+                typeof(CustomCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.Enter)
+                }
+            );
     }
 }

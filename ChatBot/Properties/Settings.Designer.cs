@@ -58,5 +58,32 @@ namespace ChatBot.Properties {
                 this["ColorBot"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6026d9a6-039c-4bc5-b127-873c1ed14c29")]
+        public string Key {
+            get {
+                return ((string)(this["Key"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3fa8bf31-a10e-4561-b1a3-ee053f9d0b1d")]
+        public string Id {
+            get {
+                return ((string)(this["Id"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dintbot.azurewebsites.net")]
+        public string Endpoint {
+            get {
+                return ((string)(this["Endpoint"]));
+            }
+        }
     }
 }

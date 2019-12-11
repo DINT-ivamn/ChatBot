@@ -16,6 +16,7 @@
         <CommandBinding x:Name="ExitCommand" Command="com:CustomCommands.Exit" Executed="ExitCommand_Executed"/>
         <CommandBinding x:Name="Configure" Command="com:CustomCommands.Configure" Executed="Configure_Executed"/>
         <CommandBinding x:Name="CheckConnection" Command="com:CustomCommands.CheckConnection" Executed="CheckConnection_Executed"/>
+        <CommandBinding x:Name="SendMessage" Command="com:CustomCommands.SendMessage" Executed="SendMessage_Executed" CanExecute="SendMessage_CanExecute"/> 
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -26,24 +27,45 @@
             <Setter Property="Height" Value="30"/>
         </Style>
 
-        <!-- Estilos:BorderUsuario -->
-        <Style TargetType="{x:Type Border}" x:Key="IzquierdaBorder">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorUsuario}"/>
+        <!-- Estilos:Image Mensaje -->
+        <Style TargetType="{x:Type Image}" x:Key="IconoMensaje">
+            <Setter Property="Source" Value="Ico/user.ico"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+            <Style.Triggers>
+                <Trigger Property="Tag" Value="Robot">
+                    <Setter Property="Source" Value="Ico/bot.ico"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
-        <!-- Estilos:BorderBot -->
-        <Style TargetType="{x:Type Border}" x:Key="DerechaBorder">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorBot}"/>
+        <!-- Estilos:Border -->
+        <Style TargetType="{x:Type Border}" x:Key="BordeMensaje">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorUsuario}"/>
+            <Style.Triggers>
+                <Trigger Property="Tag" Value="Robot">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorBot}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- DataTemplate -->
         <DataTemplate DataType="{x:Type local:Mensaje}">
-            <Border BorderBrush="Black" BorderThickness="1" Style="{StaticResource DerechaBorder}">
+            <Border Tag="{Binding Path=Emisor}" Style="{StaticResource BordeMensaje}">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=Emisor}"/>
-                    <TextBlock Text="{Binding Path=Texto}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Tag="{Binding Path=Emisor}" Style="{StaticResource IconoMensaje}"/>
+                        <TextBlock Text="{Binding Path=Emisor}" VerticalAlignment="Center" FontWeight="Bold"
+                                   FontSize="15"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Path=Texto}" FontSize="14"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -106,10 +128,10 @@
             </ToolBar>
         </ToolBarTray>
         <DockPanel DockPanel.Dock="Bottom">
-            <Button DockPanel.Dock="Right">
+            <Button DockPanel.Dock="Right" IsDefault="True" Command="com:CustomCommands.SendMessage">
                 <Image Source="Ico/send.ico"  Style="{StaticResource Icono}"/>
             </Button>
-            <TextBox FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
+            <TextBox x:Name="MensajeTextBox" FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
         </DockPanel>
         <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}"/>
     </DockPanel>
