@@ -11,12 +11,12 @@
         Background="{Binding Source={x:Static prop:Settings.Default}, Path=ColorFondo}">
 
     <Window.CommandBindings>
-        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute"/>
-        <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute"/>
-        <CommandBinding x:Name="ExitCommand" Command="com:CustomCommands.Exit" Executed="ExitCommand_Executed"/>
-        <CommandBinding x:Name="Configure" Command="com:CustomCommands.Configure" Executed="Configure_Executed"/>
-        <CommandBinding x:Name="CheckConnection" Command="com:CustomCommands.CheckConnection" Executed="CheckConnection_Executed"/>
-        <CommandBinding x:Name="SendMessage" Command="com:CustomCommands.SendMessage" Executed="SendMessage_Executed" CanExecute="SendMessage_CanExecute"/> 
+        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
+        <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute" />
+        <CommandBinding x:Name="ExitCommand" Command="com:CustomCommands.Exit" Executed="ExitCommand_Executed" />
+        <CommandBinding x:Name="Configure" Command="com:CustomCommands.Configure" Executed="Configure_Executed" />
+        <CommandBinding x:Name="CheckConnection" Command="com:CustomCommands.CheckConnection" Executed="CheckConnection_Executed" />
+        <CommandBinding x:Name="SendMessage" Command="com:CustomCommands.SendMessage" Executed="SendMessage_Executed" CanExecute="SendMessage_CanExecute" />
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -24,34 +24,34 @@
         <!-- Estilos -->
         <!-- Estilos:Image -->
         <Style TargetType="{x:Type Image}" x:Key="Icono">
-            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="30" />
         </Style>
 
         <!-- Estilos:Image Mensaje -->
         <Style TargetType="{x:Type Image}" x:Key="IconoMensaje">
-            <Setter Property="Source" Value="Ico/user.ico"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Margin" Value="0,0,5,0"/>
+            <Setter Property="Source" Value="Ico/user.ico" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="0,0,5,0" />
             <Style.Triggers>
                 <Trigger Property="Tag" Value="Robot">
-                    <Setter Property="Source" Value="Ico/bot.ico"/>
+                    <Setter Property="Source" Value="Ico/bot.ico" />
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <!-- Estilos:Border -->
         <Style TargetType="{x:Type Border}" x:Key="BordeMensaje">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="CornerRadius" Value="5"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorUsuario}"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorUsuario}" />
             <Style.Triggers>
                 <Trigger Property="Tag" Value="Robot">
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
-                    <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorBot}"/>
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="Background" Value="{Binding Source={x:Static prop:Settings.Default}, Path=ColorBot}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -61,16 +61,14 @@
             <Border Tag="{Binding Path=Emisor}" Style="{StaticResource BordeMensaje}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Image Tag="{Binding Path=Emisor}" Style="{StaticResource IconoMensaje}"/>
+                        <Image Tag="{Binding Path=Emisor}" Style="{StaticResource IconoMensaje}" />
                         <TextBlock Text="{Binding Path=Emisor}" VerticalAlignment="Center" FontWeight="Bold"
-                                   FontSize="15"/>
+                                   FontSize="15" />
                     </StackPanel>
-                    <TextBlock Text="{Binding Path=Texto}" FontSize="14" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Path=Texto}" FontSize="14" TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
         </DataTemplate>
-
-
     </Window.Resources>
 
     <DockPanel>
@@ -78,30 +76,30 @@
             <MenuItem Header="Archivo">
                 <MenuItem Header="Nueva conversación" Command="ApplicationCommands.New">
                     <MenuItem.Icon>
-                        <Image Source="Ico/dialog.ico"/>
+                        <Image Source="Ico/dialog.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Guardar conversación..." Command="ApplicationCommands.Save">
                     <MenuItem.Icon>
-                        <Image Source="Ico/save.ico"/>
+                        <Image Source="Ico/save.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <Separator/>
+                <Separator />
                 <MenuItem Header="Salir" Command="com:CustomCommands.Exit">
                     <MenuItem.Icon>
-                        <Image Source="Ico/exit.ico"/>
+                        <Image Source="Ico/exit.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Herramientas">
                 <MenuItem Header="Configuración..." Command="com:CustomCommands.Configure">
                     <MenuItem.Icon>
-                        <Image Source="Ico/gear.ico"/>
+                        <Image Source="Ico/gear.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Comprobación de conexión" Command="com:CustomCommands.CheckConnection">
                     <MenuItem.Icon>
-                        <Image Source="Ico/tick.ico"/>
+                        <Image Source="Ico/tick.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -109,32 +107,33 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Command="ApplicationCommands.New">
-                    <Image Source="Ico/dialog.ico" Style="{StaticResource Icono}"/>
+                    <Image Source="Ico/dialog.ico" Style="{StaticResource Icono}" />
                 </Button>
                 <Button Command="ApplicationCommands.Save">
-                    <Image Source="Ico/save.ico" Style="{StaticResource Icono}"/>
+                    <Image Source="Ico/save.ico" Style="{StaticResource Icono}" />
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button Command="com:CustomCommands.Configure">
-                    <Image Source="Ico/gear.ico" Style="{StaticResource Icono}"/>
+                    <Image Source="Ico/gear.ico" Style="{StaticResource Icono}" />
                 </Button>
                 <Button Command="com:CustomCommands.CheckConnection">
-                    <Image Source="Ico/tick.ico" Style="{StaticResource Icono}"/>
+                    <Image Source="Ico/tick.ico" Style="{StaticResource Icono}" />
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button Command="com:CustomCommands.Exit">
-                    <Image Source="Ico/exit.ico" Style="{StaticResource Icono}"/>
+                    <Image Source="Ico/exit.ico" Style="{StaticResource Icono}" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
         <DockPanel DockPanel.Dock="Bottom">
             <Button DockPanel.Dock="Right" IsDefault="True" Command="com:CustomCommands.SendMessage">
-                <Image Source="Ico/send.ico"  Style="{StaticResource Icono}"/>
+                <Image Source="Ico/send.ico"  Style="{StaticResource Icono}" />
             </Button>
-            <TextBox x:Name="MensajeTextBox" FontSize="15" BorderThickness="2" BorderBrush="Black" AcceptsReturn="False"/>
+            <TextBox x:Name="MensajeTextBox" FontSize="15" BorderThickness="2" BorderBrush="Black"
+                     AcceptsReturn="False" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=Mensaje, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}"/>
+            <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}, Path=Mensajes}" />
         </ScrollViewer>
     </DockPanel>
 </Window>

@@ -1,28 +1,47 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.ComponentModel;
 
 namespace ChatBot
 {
-    public class Mensaje
+    public class Mensaje :INotifyPropertyChanged
     {
+        private string emisor;
+        public string Emisor
+        {
+            get
+            {
+                return emisor;
+            }
+            set
+            {
+                emisor = value;
+                NotifyPropertyChanged("Emisor");
+            }
+        }
+        private string texto;
+        public string Texto
+        {
+            get
+            {
+                return texto;
+            }
+            set
+            {
+                texto = value;
+                NotifyPropertyChanged("Texto");
+            }
+        }
 
-        public string Emisor { get; set; }
-        public string Texto { get; set; }
-        public bool IsBot { get; set; }
-
-        public Mensaje(string emisor, string texto, bool bot)
+        public Mensaje(string emisor, string texto)
         {
             Emisor = emisor;
             Texto = texto;
-            IsBot = bot;
         }
 
-        // Delete this
-        public static ObservableCollection<Mensaje> GenerarMensajes()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
         {
-            ObservableCollection<Mensaje> mensajes = new ObservableCollection<Mensaje>();
-            mensajes.Add(new Mensaje("Usuario", "Mensaje de ejemplo", false));
-            mensajes.Add(new Mensaje("Robot", "Mensaje de ejemplo", true));
-            return mensajes;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

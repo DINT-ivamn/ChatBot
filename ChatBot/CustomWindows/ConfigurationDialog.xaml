@@ -7,10 +7,11 @@
         xmlns:global="clr-namespace:ChatBot"
         xmlns:prop="clr-namespace:ChatBot.Properties"
         mc:Ignorable="d"
-        Title="ConfigurationDialog" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" x:Name="ConfigurationDialogWindows">
+        Title="ConfigurationDialog" Height="450" Width="800" SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize" x:Name="ConfigurationDialogWindows" ShowInTaskbar="False">
 
     <Window.Resources>
-        
+
         <!-- Estilos -->
 
         <!-- Estilos:ComboBox -->
@@ -26,15 +27,15 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="10,0,10,0"/>
         </Style>
-        
+
         <!-- Estilos:Button -->
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Padding" Value="5,0,5,0"/>
         </Style>
-        
+
         <!-- Templates -->
-        
+
         <DataTemplate DataType="{x:Type global:MyColor}">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Rectangle Fill="{Binding Path=Nombre}" Height="20" Width="40" Margin="0,0,5,0"/>
@@ -42,7 +43,7 @@
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
-    
+
     <Grid Height="200" Width="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
