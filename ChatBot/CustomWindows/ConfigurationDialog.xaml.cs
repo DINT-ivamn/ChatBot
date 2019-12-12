@@ -21,10 +21,10 @@ namespace ChatBot.CustomWindows
     /// </summary>
     public partial class ConfigurationDialog : Window
     {
-        public ObservableCollection<MyColor> Colores { get; set; }
-        public MyColor ColorUsuario { get; set; }
-        public MyColor ColorFondo { get; set; }
-        public MyColor ColorRobot { get; set; }
+        public ObservableCollection<string> Colores { get; set; }
+        public string ColorUsuario { get; set; }
+        public string ColorFondo { get; set; }
+        public string ColorRobot { get; set; }
 
         public ConfigurationDialog()
         {
@@ -43,17 +43,13 @@ namespace ChatBot.CustomWindows
 
         private void LoadColors()
         {
-            Colores = new ObservableCollection<MyColor>();
-            PropertyInfo[] properties = typeof(Colors).GetProperties();
-            foreach (PropertyInfo item in properties)
-            {
-                Colores.Add(new MyColor(item.Name));
-            }
+            Colores = new ObservableCollection<string>(typeof(Colors).GetProperties().Select(s => s.Name));
+            
         }
 
-        private MyColor FindColor(string nombre)
+        private string FindColor(string nombre)
         {
-            return Colores.ToList().Find(c => c.Nombre == nombre);
+            return Colores.ToList().Find(c => c == nombre);
         }
     }
 }

@@ -75,9 +75,9 @@ namespace ChatBot
             };
             if (dialog.ShowDialog() == true)
             {
-                Properties.Settings.Default.ColorUsuario = dialog.ColorUsuario.Nombre;
-                Properties.Settings.Default.ColorFondo = dialog.ColorFondo.Nombre;
-                Properties.Settings.Default.ColorBot = dialog.ColorRobot.Nombre;
+                Properties.Settings.Default.ColorUsuario = dialog.ColorUsuario;
+                Properties.Settings.Default.ColorFondo = dialog.ColorFondo;
+                Properties.Settings.Default.ColorBot = dialog.ColorRobot;
                 Properties.Settings.Default.Save();
             }
         }
