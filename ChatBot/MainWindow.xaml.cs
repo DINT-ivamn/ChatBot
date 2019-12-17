@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ChatBot
 {
@@ -20,6 +21,7 @@ namespace ChatBot
         private bool RespuestaRecibida { get; set; }
         private ClienteQnA QnA { get; set; }
         public string Mensaje { get; set; }
+        private string UltimoMensajeUsuario { get; set; }
 
         public MainWindow()
         {
@@ -82,11 +84,16 @@ namespace ChatBot
             }
         }
 
-        private void CheckConnection_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void CheckConnection_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                // Preguntar al bot y comprobar que recibimos un mensaje
+                Task<string> t = QnA.PreguntarAsync("Hola");
+                await t;
+                if (t.IsCompleted)
+                {
+                    MessageBox.Show("Conexión correcta", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -99,7 +106,7 @@ namespace ChatBot
             StringBuilder builder = new StringBuilder();
             foreach (Mensaje mensaje in Mensajes)
             {
-                builder.AppendLine(mensaje.Emisor + ":" + mensaje.Texto);
+                builder.AppendLine(mensaje.Emisor + ": " + mensaje.Texto);
             }
             return builder.ToString();
         }
@@ -107,6 +114,7 @@ namespace ChatBot
         private async void SendMessage_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Mensajes.Add(new Mensaje("Usuario", MensajeTextBox.Text));
+            UltimoMensajeUsuario = MensajeTextBox.Text;
             RespuestaRecibida = false;
             MensajeTextBox.Text = "";
             await ObtenerRespuestaBot();
@@ -120,10 +128,11 @@ namespace ChatBot
         private async Task ObtenerRespuestaBot()
         {
             Mensaje mensajeBot = new Mensaje("Robot", "Procesando...");
+            MainScrollViewer.ScrollToEnd();
             Mensajes.Add(mensajeBot);
             try
             {
-                Task<string> t = QnA.PreguntarAsync(Mensajes.Last().Texto);
+                Task<string> t = QnA.PreguntarAsync(UltimoMensajeUsuario);
                 await t;
                 mensajeBot.Texto = t.Result;
                 RespuestaRecibida = t.IsCompleted;

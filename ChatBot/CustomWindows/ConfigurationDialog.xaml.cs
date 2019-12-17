@@ -29,9 +29,9 @@ namespace ChatBot.CustomWindows
         public ConfigurationDialog()
         {
             LoadColors();
-            ColorUsuario = FindColor(Properties.Settings.Default.ColorUsuario);
-            ColorFondo = FindColor(Properties.Settings.Default.ColorFondo);
-            ColorRobot = FindColor(Properties.Settings.Default.ColorBot);
+            ColorUsuario = Properties.Settings.Default.ColorUsuario;
+            ColorFondo = Properties.Settings.Default.ColorFondo;
+            ColorRobot = Properties.Settings.Default.ColorBot;
             InitializeComponent();
 
         }
@@ -45,11 +45,6 @@ namespace ChatBot.CustomWindows
         {
             Colores = new ObservableCollection<string>(typeof(Colors).GetProperties().Select(s => s.Name));
             
-        }
-
-        private string FindColor(string nombre)
-        {
-            return Colores.ToList().Find(c => c == nombre);
         }
     }
 }
