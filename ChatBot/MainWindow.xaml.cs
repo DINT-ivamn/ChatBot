@@ -3,11 +3,11 @@ using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Linq;
 
 namespace ChatBot
 {
@@ -20,6 +20,7 @@ namespace ChatBot
 
         // Para comprobar si me ha respondido el bot
         private bool RespuestaRecibida { get; set; }
+
         private ClienteQnA QnA { get; set; }
 
         // El mensaje del TextBox...
@@ -38,6 +39,8 @@ namespace ChatBot
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             InitializeComponent();
+
+            MensajeTextBox.Focus();
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -59,7 +62,14 @@ namespace ChatBot
             if (dialogo.ShowDialog() == true)
             {
                 string textoMensajes = ObtenerConversacion();
-                File.WriteAllText(dialogo.FileName, textoMensajes);
+                try
+                {
+                    File.WriteAllText(dialogo.FileName, textoMensajes);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -94,12 +104,8 @@ namespace ChatBot
             try
             {
                 // Preguntar algo, si me responde hay conexión, si no se lanza excepción
-                Task<string> t = QnA.PreguntarAsync("Hola");
-                await t;
-                if (t.IsCompleted)
-                {
-                    MessageBox.Show("Conexión correcta", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                await QnA.PreguntarAsync("Hola");
+                MessageBox.Show("Conexión correcta", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
