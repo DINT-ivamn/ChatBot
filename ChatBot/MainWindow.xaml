@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatBot"
         xmlns:com="clr-namespace:ChatBot.CustomCommands"
+        xmlns:conv="clr-namespace:ChatBot.Converters"
         xmlns:prop="clr-namespace:ChatBot.Properties"
         mc:Ignorable="d"
         Title="ChatBot" Height="600" MinHeight="300" Width="400" MinWidth="200" Icon="Ico/robot.ico"
@@ -21,25 +22,22 @@
 
     <Window.Resources>
 
+        <!-- Convertidores -->
+        <conv:MessageSourceToImageConverter x:Key="MessageSourceToImageConverter"/>
+
         <!-- Estilos -->
-        <!-- Estilos:Image -->
+        <!-- Estilos:Image - Icono genérico -->
         <Style TargetType="{x:Type Image}" x:Key="Icono">
             <Setter Property="Height" Value="30" />
         </Style>
 
-        <!-- Estilos:Image Mensaje -->
+        <!-- Estilos:Image - Icono de los mensajes -->
         <Style TargetType="{x:Type Image}" x:Key="IconoMensaje">
-            <Setter Property="Source" Value="Ico/user.ico" />
             <Setter Property="Height" Value="25" />
             <Setter Property="Margin" Value="0,0,5,0" />
-            <Style.Triggers>
-                <Trigger Property="Tag" Value="Robot">
-                    <Setter Property="Source" Value="Ico/bot.ico" />
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
-        <!-- Estilos:Border -->
+        <!-- Estilos:Border - Borde de los mensajes -->
         <Style TargetType="{x:Type Border}" x:Key="BordeMensaje">
             <Setter Property="Padding" Value="10" />
             <Setter Property="CornerRadius" Value="5" />
@@ -57,12 +55,12 @@
             </Style.Triggers>
         </Style>
 
-        <!-- DataTemplate -->
+        <!-- DataTemplate - Plantilla de los mensajes -->
         <DataTemplate DataType="{x:Type local:Mensaje}">
             <Border Tag="{Binding Path=Emisor}" Style="{StaticResource BordeMensaje}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Image Tag="{Binding Path=Emisor}" Style="{StaticResource IconoMensaje}" />
+                        <Image Source="{Binding Path=Emisor, Converter={StaticResource MessageSourceToImageConverter}}" Style="{StaticResource IconoMensaje}" />
                         <TextBlock Text="{Binding Path=Emisor}" VerticalAlignment="Center" FontWeight="Bold"
                                    FontSize="15" />
                     </StackPanel>

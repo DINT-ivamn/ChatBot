@@ -3,12 +3,11 @@ using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Linq;
 
 namespace ChatBot
 {
@@ -18,10 +17,13 @@ namespace ChatBot
     public partial class MainWindow : Window
     {
         public ObservableCollection<Mensaje> Mensajes { get; set; }
+
+        // Para comprobar si me ha respondido el bot
         private bool RespuestaRecibida { get; set; }
         private ClienteQnA QnA { get; set; }
+
+        // El mensaje del TextBox...
         public string Mensaje { get; set; }
-        private string UltimoMensajeUsuario { get; set; }
 
         public MainWindow()
         {
@@ -50,8 +52,10 @@ namespace ChatBot
 
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveFileDialog dialogo = new SaveFileDialog();
-            dialogo.Filter = "Archivos de texto|.txt";
+            SaveFileDialog dialogo = new SaveFileDialog
+            {
+                Filter = "Archivos de texto|.txt"
+            };
             if (dialogo.ShowDialog() == true)
             {
                 string textoMensajes = ObtenerConversacion();
@@ -77,6 +81,7 @@ namespace ChatBot
             };
             if (dialog.ShowDialog() == true)
             {
+                // Al terminar el diálogo, cambiar la configuración y guardarla
                 Properties.Settings.Default.ColorUsuario = dialog.ColorUsuario;
                 Properties.Settings.Default.ColorFondo = dialog.ColorFondo;
                 Properties.Settings.Default.ColorBot = dialog.ColorRobot;
@@ -88,6 +93,7 @@ namespace ChatBot
         {
             try
             {
+                // Preguntar algo, si me responde hay conexión, si no se lanza excepción
                 Task<string> t = QnA.PreguntarAsync("Hola");
                 await t;
                 if (t.IsCompleted)
@@ -103,6 +109,7 @@ namespace ChatBot
 
         private string ObtenerConversacion()
         {
+            // Construir un texto a partir de todos los mensajes
             StringBuilder builder = new StringBuilder();
             foreach (Mensaje mensaje in Mensajes)
             {
@@ -114,7 +121,6 @@ namespace ChatBot
         private async void SendMessage_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Mensajes.Add(new Mensaje("Usuario", MensajeTextBox.Text));
-            UltimoMensajeUsuario = MensajeTextBox.Text;
             RespuestaRecibida = false;
             MensajeTextBox.Text = "";
             await ObtenerRespuestaBot();
@@ -122,20 +128,21 @@ namespace ChatBot
 
         private void SendMessage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            // Si no he recibido respuesta o si el mensaje del TextBox es vacío
             e.CanExecute = RespuestaRecibida && !string.IsNullOrEmpty(Mensaje);
         }
 
         private async Task ObtenerRespuestaBot()
         {
+            string ultimoMensaje = Mensajes.Last().Texto;
             Mensaje mensajeBot = new Mensaje("Robot", "Procesando...");
+            // Cada vez que el bot responda algo, hacer scroll hasta el final
             MainScrollViewer.ScrollToEnd();
             Mensajes.Add(mensajeBot);
             try
             {
-                Task<string> t = QnA.PreguntarAsync(UltimoMensajeUsuario);
-                await t;
-                mensajeBot.Texto = t.Result;
-                RespuestaRecibida = t.IsCompleted;
+                mensajeBot.Texto = await QnA.PreguntarAsync(ultimoMensaje);
+                RespuestaRecibida = true;
             }
             catch (Exception e)
             {

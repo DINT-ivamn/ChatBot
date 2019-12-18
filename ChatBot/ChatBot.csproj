@@ -89,6 +89,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClienteQNA.cs" />
+    <Compile Include="Converters\MessageSourceToImageConverter.cs" />
     <Compile Include="CustomCommands\CustomCommands.cs" />
     <Compile Include="CustomWindows\ConfigurationDialog.xaml.cs">
       <DependentUpon>ConfigurationDialog.xaml</DependentUpon>
